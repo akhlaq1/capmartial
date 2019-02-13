@@ -1,0 +1,26 @@
+$.ajax({
+    url: v,
+    type: 'GET',
+    dataType: 'json', // added data type
+    success: function(res) {
+        stu(res.total[20].Student_Count_1st_Day[0]);
+    }
+});
+function stu(aa) {
+    $.ajax({
+    url: u,
+    type: 'GET',
+    dataType: 'json', // added data type
+    success: function(res) {
+        var s=148+aa+res.total[20].Student_Count_1st_Day[0];
+        student(s);
+    }
+}); 
+}
+
+var cc = new Date((new Date(s.getFullYear(), s.getMonth(), s.getDate())).valueOf() - 86350989);
+                    var yesmon = cc.getMonth()+1;
+                    var yes = yyyy+'-'+yesmon+'-'+cc.getDate();
+                    console.log(yes);
+                    var u = '/records_by_date/'+s+'/'+e;
+                    var v = '/records_by_date/'+yyyy+'01-01'+'/'+yes;

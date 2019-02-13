@@ -1,0 +1,661 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <title>Excel Page</title>
+        <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/handsontable@6.2.2/dist/handsontable.full.css">
+        <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/handsontable@6.2.2/dist/handsontable.css">
+        <script src="https://cdn.jsdelivr.net/npm/handsontable@6.2.2/dist/handsontable.full.min.js"></script>
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+        <style>
+            #hot-display-license-info {
+                display:none;
+            }
+            .htRight.htNumeric, #hot6 .ht_master tr:nth-child(2) > td:nth-child(1), #hot6 .ht_master tr:nth-child(2) > td:nth-child(2), #hot6 .ht_master tr:nth-child(2) > td:nth-child(3), #hot7 .ht_master tr:nth-child(2) > td:nth-child(2), #hot7 .ht_master tr:nth-child(2) > td:nth-child(3) {
+                background:rgb(226, 177, 177);
+            }
+            #hot6 .ht_master tr:nth-child(2) > td:nth-child(1), #hot6 .ht_master tr:nth-child(2) > td:nth-child(2), #hot6 .ht_master tr:nth-child(2) > td:nth-child(3) {
+                border: 1px solid rgb(65, 64, 64);
+                font-weight: bold;
+                text-align: center;
+            }
+            #hot6 .ht_master tr:nth-child(1) > td:nth-child(1), #hot6 .ht_master tr:nth-child(1) > td:nth-child(2), #hot6 .ht_master tr:nth-child(1) > td:nth-child(3) {
+                height: 40px;
+                text-align: center;
+                padding-top: 20px;
+                font-weight: bold;
+                font-size: 30px;
+                border: none;
+            }
+            #hot7 .ht_master tr:nth-child(1) > td:nth-child(1), #hot7 .ht_master tr:nth-child(1) > td:nth-child(2), #hot7 .ht_master tr:nth-child(1) > td:nth-child(3) {
+                text-align: center;
+                font-weight: bold;
+                border: none;
+            }
+            #hot7 .ht_master tr:nth-child(2) > td:nth-child(1), #hot7 .ht_master tr:nth-child(2) > td:nth-child(2), #hot7 .ht_master tr:nth-child(2) > td:nth-child(3) {
+                border: 1px solid rgb(65, 64, 64);
+            }
+            #hot .ht_master tr:nth-child(7) > td:nth-child(1) {
+                font-weight: bold;
+                font-style: normal;
+            }
+            #hot .ht_master tr:nth-child(1) > td:nth-child(1), #hot tr:nth-child(2) > td:nth-child(1), #hot tr:nth-child(3) > td:nth-child(1), #hot tr:nth-child(4) > td:nth-child(1), #hot tr:nth-child(5) > td:nth-child(1), #hot tr:nth-child(6) > td:nth-child(1) {
+                text-align: right;
+            }
+            #hot .ht_master tr:nth-child(7) > td:nth-child(1) {
+                font-style: normal;
+            }
+            #hot .ht_master tr:nth-child(7) > td:nth-child(2), #hot4 .ht_master tr:nth-child(6) > td:nth-child(2), #hot4 .ht_master tr:nth-child(7) > td:nth-child(2), #hot4 .ht_master tr:nth-child(10) > td:nth-child(2), #hot7 .ht_master tr:nth-child(2) > td:nth-child(1) {
+                background-color: rgb(206, 205, 205);
+            }
+            #hot7 .ht_master tr:nth-child(2) > td:nth-child(1) {
+                text-align: center;
+            }
+            #hot3 .ht_master tr:nth-child(5) > td:nth-child(1), #hot7 .ht_master tr:nth-child(2) > td:nth-child(1) {
+                font-weight: bold;
+            }
+            #hot3 .ht_master tr:nth-child(5) > td:nth-child(2) {
+                font-weight: bold;
+                background-color: rgb(206, 205, 205);
+            }
+            #hot4 .ht_master tr:nth-child(10) > td:nth-child(1), #hot5 .ht_master tr:nth-child(1) > td:nth-child(1), #hot5 .ht_master tr:nth-child(1) > td:nth-child(2), #hot5 .ht_master tr:nth-child(1) > td:nth-child(3), #hot5 .ht_master tr:nth-child(1) > td:nth-child(4), #hot5 .ht_master tr:nth-child(1) > td:nth-child(5) {
+                font-weight: bold;
+            }
+            #hot8 .ht_master tr:nth-child(1) > td:nth-child(1) {
+                font-weight: bold;
+                text-align: right;
+                background-color: gray;
+            }
+            #hot7 .ht_master tr:nth-child(2) > td:nth-child(1) {
+                background-color: gray;
+            }
+            #hot8 .ht_master tr:nth-child(1) > td:nth-child(2) {
+                background-color: rgb(206, 205, 205);
+            }
+            #hot5 .ht_master tr:nth-child(1) > td:nth-child(5),#hot5 .ht_master tr:nth-child(2) > td:nth-child(5),#hot5 .ht_master tr:nth-child(3) > td:nth-child(5),#hot5 .ht_master tr:nth-child(4) > td:nth-child(5) {
+                background-color: rgb(206, 205, 205);
+            }
+        </style>
+    </head>
+    <body>
+        <img style="width: 100px; height: 100px; margin-left: 20px;" src="./static/img/CMAA.png">
+        <h1 style="text-align: center; font-weight: bold; font-size: 35px; margin-top: -3%;">Daily Statistical Report</h1>
+        <div id="hot6"></div>
+        <div style="text-align:center; width: 360px; margin-top: 3%; font-weight: bold; background: gray; font-size: 25px; font-style: bold;">New Student Acquisition</div>
+        <div style="font-style:italic;" id="hot"></div>
+        <div style="margin-top: -50px;">
+            <div style="text-align:center; width: 360px;font-weight: bold; background: gray; font-size: 25px; font-style: bold;">Intros</div>
+            <div id="hot1"></div>
+        </div>
+        <div style="margin-top: -5%;">
+            <div style="text-align:center; width: 360px; font-weight: bold; background: gray; font-size: 25px; font-style: bold;">Cancellations</div>
+            <div id="hot2"></div>
+        </div>
+        <div style="margin-left: 35%; margin-top: -58%;">
+            <div style="text-align:center; font-weight: bold; width: 360px; background: gray; font-size: 25px; font-style: bold;">Attendence</div>
+            <div id="hot3"></div>
+        </div>
+        <div style="margin-left: 70%; margin-top: -22%;">
+            <div style="text-align:center; font-weight: bold; width: 360px; background: gray; font-size: 25px; font-style: bold;">Daily Revenue</div>
+            <div id="hot4"></div>
+        </div>
+        <div style="margin-left: 35%; margin-top: -2%;">
+            <div style="text-align:center;font-weight: bold; width: 900px; background: gray; font-size: 25px; font-style: bold;">Conversion</div>
+            <div id="hot5"></div>
+        </div>
+        <div style="margin-left: 35%; margin-top: -5%;" id="hot8"></div>
+        <center><a href="./dashboard"><button style=" margin-top: 55px; height: 50px; width: 100px; font-size: 20px;" onclick="dt()" class="btn btn-success">Submit</button></a></center>
+    </body>
+
+    <script>
+        var dataObject6 = [
+            {level: 'Date'},
+            {level: ''}
+        ];
+    
+        var flagRenderer = function(instance, td, row, col, prop, value, cellProperties) {
+            var currencyCode = value;
+
+            while (td.firstChild) {
+            td.removeChild(td.firstChild);
+            }
+
+            if (currencyCodes.indexOf(currencyCode) > -1) {
+            var flagElement = document.createElement('DIV');
+            flagElement.className = 'flag ' + currencyCode.toLowerCase();
+            td.appendChild(flagElement);
+
+            } else {
+            var textNode = document.createTextNode(value === null ? '' : value);
+            td.appendChild(textNode);
+            }
+        };
+
+        var hotElement6 = document.querySelector('#hot6');
+        var hotElement6Container = hotElement6.parentNode;
+        var hotSettings6 = {
+            data: dataObject6,
+            columns: [
+                {
+                    data: 'level',
+                    type: 'date',
+                    dateFormat: 'YYYY-MM-DD'
+                },
+            ],
+            stretchH: 'all',
+            width: 200,
+            autoWrapRow: true,
+            height: 100,
+            maxRows: 9,
+            rowHeaders: false,
+            contextMenu: true,
+        };
+
+        var hot6 = new Handsontable(hotElement6, hotSettings6);
+
+        var dataObject = [
+        {currency: 'Inquiry-Call-In', level: 0},
+        {currency: 'Inquiry-Walk-In', level: 0},
+        {currency: 'Inquiry-Web', level: 0},
+        {currency: 'Inquiry-Special Event', level: 0},
+        {currency: 'Inquiry-Referral',	level: 0},
+        {currency: 'Inquiry-Other',	level: 0},
+        {currency: 'Total Inquiries ~ Warm Leads',	level: 0, readOnly: true},
+        {currency: 'Appointments Set',	level: 0},
+        ];
+  
+    var flagRenderer = function(instance, td, row, col, prop, value, cellProperties) {
+        var currencyCode = value;
+
+        while (td.firstChild) {
+        td.removeChild(td.firstChild);
+        }
+
+        if (currencyCodes.indexOf(currencyCode) > -1) {
+        var flagElement = document.createElement('DIV');
+        flagElement.className = 'flag ' + currencyCode.toLowerCase();
+        td.appendChild(flagElement);
+
+        } else {
+        var textNode = document.createTextNode(value === null ? '' : value);
+        td.appendChild(textNode);
+        }
+    };
+
+    var hotElement = document.querySelector('#hot');
+    var hotElementContainer = hotElement.parentNode;
+    var hotSettings = {
+        data: dataObject,
+        columns: [
+            {
+                data: 'currency',
+                type: 'text'
+            },
+            {
+                data: 'level',
+                type: 'numeric'
+            }
+        ],
+        stretchH: 'all',
+        width: 360,
+        autoWrapRow: true,
+        height: 300,
+        maxRows: 8,
+        rowHeaders: false,
+        contextMenu: true,
+    };
+
+    var hot = new Handsontable(hotElement, hotSettings);
+
+    hot.addHook('afterChange', function(changes, src) {
+        if (!setter) {
+        setter = true;
+        var r= hot.getDataAtCell(0,1) + hot.getDataAtCell(1,1) + hot.getDataAtCell(2,1) + hot.getDataAtCell(3,1) + hot.getDataAtCell(4,1) + hot.getDataAtCell(5,1);
+        hot.setDataAtCell(6, 1, r);
+        } else {
+        setter = false;
+        }
+    });
+
+    var dataObject1 = [
+    {currency: 'Intro 1', level: 0},
+    {currency: 'Intro 1 - Attended/Showed', level: 0},
+    {currency: 'Intro 2', level: 0},
+    {currency: 'Intro 2 - Attended/Showed',	level: 0},
+    {currency: 'Enrollment Conferences', level: 0},
+    {currency: 'Renewal / Upgrade Conferences',	level: 0},
+    ];
+  
+    var flagRenderer = function(instance, td, row, col, prop, value, cellProperties) {
+        var currencyCode = value;
+
+        while (td.firstChild) {
+        td.removeChild(td.firstChild);
+        }
+
+        if (currencyCodes.indexOf(currencyCode) > -1) {
+        var flagElement = document.createElement('DIV');
+        flagElement.className = 'flag ' + currencyCode.toLowerCase();
+        td.appendChild(flagElement);
+
+        } else {
+        var textNode = document.createTextNode(value === null ? '' : value);
+        td.appendChild(textNode);
+        }
+    };
+
+    var hotElement1 = document.querySelector('#hot1');
+    var hot1ElementContainer = hotElement1.parentNode;
+    var hotSettings1 = {
+        data: dataObject1,
+        columns: [
+            {
+                data: 'currency',
+                type: 'text'
+            },
+            {
+                data: 'level',
+                type: 'numeric',
+                format: '0.0000'
+            }
+        ],
+        stretchH: 'all',
+        width: 360,
+        autoWrapRow: true,
+        height: 300,
+        maxRows: 6,
+        rowHeaders: false,
+        contextMenu: true
+    };
+
+    var hot1 = new Handsontable(hotElement1, hotSettings1);
+    
+    var dataObject2 = [
+    {currency: '# of Cancellations', level: 0},
+    {currency: 'Cancellation Fee Collected', level: 0},
+    {currency: 'Reduction in Monthly Payment (-)', level: 0},
+    ];
+  
+    var flagRenderer = function(instance, td, row, col, prop, value, cellProperties) {
+        var currencyCode = value;
+
+        while (td.firstChild) {
+        td.removeChild(td.firstChild);
+        }
+
+        if (currencyCodes.indexOf(currencyCode) > -1) {
+        var flagElement = document.createElement('DIV');
+        flagElement.className = 'flag ' + currencyCode.toLowerCase();
+        td.appendChild(flagElement);
+
+        } else {
+        var textNode = document.createTextNode(value === null ? '' : value);
+        td.appendChild(textNode);
+        }
+    };
+
+    var hotElement2 = document.querySelector('#hot2');
+    var hotElement2Container = hotElement2.parentNode;
+    var hotSettings2 = {
+        data: dataObject2,
+        columns: [
+            {
+                data: 'currency',
+                type: 'text'
+            },
+            {
+                data: 'level',
+                type: 'numeric',
+                format: '0.0000'
+            }
+        ],
+        stretchH: 'all',
+        width: 360,
+        autoWrapRow: true,
+        height: 300,
+        maxRows: 3,
+        rowHeaders: false,
+        contextMenu: true
+    };
+
+    var hot2 = new Handsontable(hotElement2, hotSettings2);
+    var setter = false;
+    hot2.addHook('afterChange', function(changes, src) {
+        if (!setter) {
+        setter = true;
+        hot4.setDataAtCell(6, 1, hot2.getDataAtCell(1,1));
+        var r= hot5.getDataAtCell(3,4) - hot2.getDataAtCell(2,1);
+        hot8.setDataAtCell(0, 1, r);
+        setter = false;
+        } else {
+        setter = false;
+        }
+    });
+    var dataObject3 = [
+        {currency: 'Dragon', level: 0},
+        {currency: 'Basic', level: 0},
+        {currency: 'Mastery', level: 0},
+        {currency: 'Adults', level: 0},
+        {currency: 'Total', level: 0, readOnly: true},
+        ];
+  
+    var flagRenderer = function(instance, td, row, col, prop, value, cellProperties) {
+        var currencyCode = value;
+
+        while (td.firstChild) {
+        td.removeChild(td.firstChild);
+        }
+
+        if (currencyCodes.indexOf(currencyCode) > -1) {
+        var flagElement = document.createElement('DIV');
+        flagElement.className = 'flag ' + currencyCode.toLowerCase();
+        td.appendChild(flagElement);
+
+        } else {
+        var textNode = document.createTextNode(value === null ? '' : value);
+        td.appendChild(textNode);
+        }
+    };
+
+    var hotElement3 = document.querySelector('#hot3');
+    var hotElement3Container = hotElement3.parentNode;
+    var hotSettings3 = {
+        data: dataObject3,
+        columns: [
+            {
+                data: 'currency',
+                type: 'text'
+            },
+            {
+                data: 'level',
+                type: 'numeric',
+                format: '0.0000'
+            }
+        ],
+        stretchH: 'all',
+        width: 360,
+        autoWrapRow: true,
+        height: 300,
+        maxRows: 5,
+        rowHeaders: false,
+        contextMenu: true
+    };
+
+    var hot3 = new Handsontable(hotElement3, hotSettings3);
+    hot3.addHook('afterChange', function(changes, src) {
+        if (!setter) {
+        setter = true;
+        var r= hot3.getDataAtCell(0,1) + hot3.getDataAtCell(1,1) + hot3.getDataAtCell(2,1) + hot3.getDataAtCell(3,1);
+        hot3.setDataAtCell(4, 1, r);
+        } else {
+        setter = false;
+        }
+    });
+    var dataObject4 = [
+        {currency: 'Tuition', level: 0},
+        {currency: 'Compression', level: 0},
+        {currency: 'Retail', level: 0},
+        {currency: 'Special Event', level: 0},
+        {currency: 'Promotion Fee', level: 0},
+        {currency: 'Down Payments', level: 0},
+        {currency: 'Cancellation Fees', level: 0, readOnly: true},
+        {currency: 'Other Revenue', level: 0},
+        {currency: 'Refunds (-)', level: 0},
+        {currency: 'Total Gross Revenue', level: 0, readOnly: true},
+        ];
+  
+    var flagRenderer = function(instance, td, row, col, prop, value, cellProperties) {
+        var currencyCode = value;
+
+        while (td.firstChild) {
+        td.removeChild(td.firstChild);
+        }
+
+        if (currencyCodes.indexOf(currencyCode) > -1) {
+        var flagElement = document.createElement('DIV');
+        flagElement.className = 'flag ' + currencyCode.toLowerCase();
+        td.appendChild(flagElement);
+
+        } else {
+        var textNode = document.createTextNode(value === null ? '' : value);
+        td.appendChild(textNode);
+        }
+    };
+
+    var hotElement4 = document.querySelector('#hot4');
+    var hotElement4Container = hotElement4.parentNode;
+    var hotSettings4 = {
+        data: dataObject4,
+        columns: [
+            {
+                data: 'currency',
+                type: 'text',
+            },
+            {
+                data: 'level',
+                type: 'numeric',
+                format: '0.0000',
+            }
+        ],
+        stretchH: 'all',
+        width: 360,
+        autoWrapRow: true,
+        height: 300,
+        maxRows: 10,
+        rowHeaders: false,
+        contextMenu: true
+    };
+
+    var hot4 = new Handsontable(hotElement4, hotSettings4);
+
+    hot4.addHook('afterChange', function(changes, src) {
+        if (!setter) {
+        setter = true;
+        var r= hot4.getDataAtCell(0,1) + hot4.getDataAtCell(1,1) + hot4.getDataAtCell(2,1) + hot4.getDataAtCell(3,1) + hot4.getDataAtCell(4,1) + hot4.getDataAtCell(5,1) + hot4.getDataAtCell(6,1);
+        hot4.setDataAtCell(9, 1, r);
+        } else {
+        setter = false;
+        }
+    });
+
+    var dataObject5 = [
+        {currency: 'Basic Program', level: 'Result', level1: 'Upgrades/Renewals', level2: 'Result', level3: 'Total'},
+        {currency: '# of Enrollments', level: 0, level1: '# of Upgrades/Renewals', level2: 0, level3: 0},
+        {currency: 'Down Payments', level: 0, level1: 'Down Payments Total', level2: 0, level3: 0},
+        {currency: 'Monthly Payment Total', level: 0, level1: 'Monthly Payment Increase', level2: 0, level3: 0},
+        ];
+  
+    var flagRenderer = function(instance, td, row, col, prop, value, cellProperties) {
+        var currencyCode = value;
+
+        while (td.firstChild) {
+        td.removeChild(td.firstChild);
+        }
+
+        if (currencyCodes.indexOf(currencyCode) > -1) {
+        var flagElement = document.createElement('DIV');
+        flagElement.className = 'flag ' + currencyCode.toLowerCase();
+        td.appendChild(flagElement);
+
+        } else {
+        var textNode = document.createTextNode(value === null ? '' : value);
+        td.appendChild(textNode);
+        }
+    };
+
+    var hotElement5 = document.querySelector('#hot5');
+    var hotElement5Container = hotElement5.parentNode;
+    var hotSettings5 = {
+        data: dataObject5,
+        columns: [
+            {
+                data: 'currency',
+                type: 'text'
+            },
+            {
+                data: 'level',
+                type: 'numeric',
+                format: '0.0000'
+            },
+            {
+                data: 'level1',
+                type: 'text',
+            },
+            {
+                data: 'level2',
+                type: 'numeric',
+                format: '0.0000'
+            },
+            {
+                data: 'level3',
+                type: 'numeric',
+                format: '0.0000',
+                readOnly: true
+            },
+        ],
+        stretchH: 'all',
+        width: 900,
+        autoWrapRow: true,
+        height: 300,
+        maxRows: 4,
+        rowHeaders: false,
+        contextMenu: true,
+        formulas: true
+    };
+
+    var hot5 = new Handsontable(hotElement5, hotSettings5);
+    var setter = false;
+    var setter1 = false;
+    hot5.addHook('afterChange', function(changes, src) {
+        if (!setter) {
+        setter = true;
+        var s= hot5.getDataAtCell(2,1) + hot5.getDataAtCell(2,3);
+        var t = hot5.getDataAtCell(3,1) + hot5.getDataAtCell(3,3);
+        var r= hot5.getDataAtCell(3,4) - hot2.getDataAtCell(2,1);
+        hot5.setDataAtCell(3, 4, t);
+        hot4.setDataAtCell(5, 1, s);
+        hot5.setDataAtCell(2, 4, s);
+        hot8.setDataAtCell(0, 1, r);
+        if (!setter1) {
+        setter1 = true;
+        var u= hot5.getDataAtCell(1,1) + hot5.getDataAtCell(1,3);
+        hot5.setDataAtCell(1, 4, u);
+        } else {
+        setter1 = false;
+        }
+        setter = false;
+        } else {
+        setter = false;
+        }
+    });            
+
+    var dataObject8 = [
+        {currency: 'Net Billing Change (+/-)', level: 0},
+        ];
+  
+    var flagRenderer = function(instance, td, row, col, prop, value, cellProperties) {
+        var currencyCode = value;
+
+        while (td.firstChild) {
+        td.removeChild(td.firstChild);
+        }
+
+        if (currencyCodes.indexOf(currencyCode) > -1) {
+        var flagElement = document.createElement('DIV');
+        flagElement.className = 'flag ' + currencyCode.toLowerCase();
+        td.appendChild(flagElement);
+
+        } else {
+        var textNode = document.createTextNode(value === null ? '' : value);
+        td.appendChild(textNode);
+        }
+    };
+
+    var hotElement8 = document.querySelector('#hot8');
+    var hotElement8Container = hotElement8.parentNode;
+    var hotSettings8 = {
+        data: dataObject8,
+        columns: [
+            {
+                data: 'currency',
+                type: 'text'
+            },
+            {
+                data: 'level',
+                type: 'numeric',
+                format: '0.0000',
+                readOnly: true
+            }
+        ],
+        stretchH: 'all',
+        width: 900,
+        autoWrapRow: true,
+        height: 100,
+        maxRows: 1,
+        rowHeaders: false,
+        contextMenu: true
+    };
+
+    var hot8 = new Handsontable(hotElement8, hotSettings8);
+    function dt() {
+        console.log({"Date":hot6.getDataAtCell(1,0)});
+        var marker = {
+            "Date":hot6.getDataAtCell(1,0),
+            "Inquiry_Call_In":hot.getDataAtCell(0,1),
+            "Inquiry_Walk_In":hot.getDataAtCell(1,1),
+            "Inquiry_Web":hot.getDataAtCell(2,1),
+            "Inquiry_Referral":hot.getDataAtCell(4,1),
+            "Inquiry_Other":hot.getDataAtCell(5,1),
+            "Total_Inquiries_Warm_Leads":hot.getDataAtCell(6,1),
+            "Appointments_Set":hot.getDataAtCell(7,1),
+            "Intro_1":hot1.getDataAtCell(0,1),
+            "Intro_1_Attended_Showed":hot1.getDataAtCell(1,1),
+            "Intro_2":hot1.getDataAtCell(2,1),
+            "Intro_2_Attended_Showed":hot1.getDataAtCell(3,1),
+            "Enrollment_Conferences":hot1.getDataAtCell(4,1),
+            "Renewal_Upgrade_Conferences":hot1.getDataAtCell(5,1),
+            "no_of_Cancellations":hot2.getDataAtCell(0,1),
+            "Dragon":hot3.getDataAtCell(0,1),
+            "Basic":hot3.getDataAtCell(1,1),
+            "Mastery":hot3.getDataAtCell(2,1),
+            "Adults":hot3.getDataAtCell(3,1),
+            "Total":hot3.getDataAtCell(4,1),
+            "no_of_Enrollments":hot5.getDataAtCell(1,1),
+            "Student_Count_1st_Day":hot5.getDataAtCell(1,1)-hot2.getDataAtCell(0,1),
+            "Student_Count_2nd_Day":hot.getDataAtCell(3,1),
+            "no_of_Upgrades_Renewals":hot5.getDataAtCell(1,4),
+            "Tuition":hot4.getDataAtCell(0,1),
+            "Compression":hot4.getDataAtCell(1,1),
+            "Retail":hot4.getDataAtCell(2,1),
+            "Special_Event":hot4.getDataAtCell(3,1),
+            "Promotion_Fee":hot4.getDataAtCell(4,1),
+            "Down_Payments_Daily":hot4.getDataAtCell(5,1),
+            "Cancellation_Fees":hot4.getDataAtCell(6,1),
+            "Other_Revenue":hot4.getDataAtCell(7,1),
+            "Refunds":hot4.getDataAtCell(8,1),
+            "Total_Gross_Revenue":hot4.getDataAtCell(9,1),
+            "Net_Billing_Change":hot8.getDataAtCell(0,1),
+            "Down_Payments":hot5.getDataAtCell(2,1),
+            "Monthly_Payment_Total":hot5.getDataAtCell(3,1),
+            "Down_Payments_Total":hot5.getDataAtCell(2,3),
+            "Monthly_Payment_Increase":hot5.getDataAtCell(3,3),
+            "Cancellation_Fee_Collected":hot2.getDataAtCell(1,1),
+            "Reduction_in_Monthly_Payment":hot2.getDataAtCell(2,1),
+            "no_upgrades_renewals_total":hot5.getDataAtCell(1,4),
+            "Down_payments_total_total":hot5.getDataAtCell(2,4),
+            "Monthly_Payments_Increase_total":hot5.getDataAtCell(3,4) 
+        };
+        console.log(marker);
+        $.ajax({
+            method: "POST",
+            url: "/store_data",
+            data: JSON.stringify(marker),
+            contentType: "application/json; charset=utf-8",
+            dataType: "json"
+        });
+
+        
+    }
+    </script>
+</html>

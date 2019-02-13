@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html>
+<head>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<script>
+$.ajax({
+        url: "/records_by_date/27-12-2003/30-12-2003",
+        type: 'GET',
+        dataType: 'json', // added data type
+        success: function(res) {
+            console.log(res);
+        }
+    });
+</script>
+</head>
+</html>
+C:\Program Files (x86)\Google\Chrome\Application>chrome.exe --user-data-dir="C:/Chrome dev session" --disable-web-security
